@@ -28,7 +28,7 @@ typedef vector<ll> vll;
 typedef vector<pll> vpll;
 typedef vector<vll> vvll;
 typedef vector<string> vs;
-// CODE WRITTEN BY KRISHNA_6431
+// CODE WRITTEN BY KRISHNA
 int distinct(vector<int> v)
 {
     map<int, int> m;
