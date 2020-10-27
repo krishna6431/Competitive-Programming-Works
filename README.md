@@ -13,7 +13,7 @@ LinkedIN : https://www.linkedin.com/in/krishna6431/<br><br>
 
 Youtube : https://www.youtube.com/channel/UCFQOSjZt3gcsrKSok7klqsQ<br><br>
 
-Email : vermakrish921@gmail.com<br><br>
+Email : vermakrish921@gmail.com<br>
 
 
 Thank u so much<br><br>
