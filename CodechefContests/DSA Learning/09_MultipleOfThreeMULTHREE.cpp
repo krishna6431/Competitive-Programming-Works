@@ -51,46 +51,43 @@ int main()
 
     while (t--)
     {
-        ll digits, d0, d1;
+        ll digits;
+        int d0, d1;
         cin >> digits >> d0 >> d1;
-        ll s = d0 + d1;
-        ll cycle = (2 * s) % 10 + (4 * s) % 10 + (8 * s) % 10 + (6 * s) % 10;
+        int s = d0 + d1;
+        int cycle = (2 * s) % 10 + (4 * s) % 10 + (8 * s) % 10 + (6 * s) % 10;
         ll total_cycle = (digits - 3) / 4;
-        ll r_start = (digits - 3) % 4;
+        int r_start = (digits - 3) % 4;
 
         ll sum = 0;
 
         if (digits == 2)
         {
             sum = s;
-            if ((sum % 3) == 0)
+            if (sum % 3 == 0)
             {
                 cout << "YES" << endl;
-                continue;
             }
             else
             {
                 cout << "NO" << endl;
-                continue;
             }
         }
         else if (digits == 3)
         {
-            sum = s + (s % 10);
+            sum = s + s % 10;
             if ((sum % 3) == 0)
             {
                 cout << "YES" << endl;
-                continue;
             }
             else
             {
                 cout << "NO" << endl;
-                continue;
             }
         }
         else
         {
-            ll p;
+            int p = 0;
             if (r_start == 1)
             {
                 p = (2 * s) % 10;
@@ -101,14 +98,14 @@ int main()
             }
             else if (r_start == 3)
             {
-                p = p = (2 * s) % 10 + (4 * s) % 10 + (8 * s) % 10;
+                p = (2 * s) % 10 + (4 * s) % 10 + (8 * s) % 10;
             }
             else
             {
             }
 
-            sum = s + (s % 10) + (cycle * total_cycle) + p;
-            if ((sum % 3) == 0)
+            sum = s + (s % 10) + (1ll * cycle * total_cycle) + p;
+            if (sum % 3 == 0)
             {
                 cout << "YES" << endl;
             }
