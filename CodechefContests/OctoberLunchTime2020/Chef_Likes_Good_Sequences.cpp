@@ -54,15 +54,34 @@ int main()
         {
             cin >> v[i];
         }
+        ll x, y;
+        cin >> x >> y;
+        v[x - 1] = y;
+        ll count = 1;
+        for (int i = 1; i < n; i++)
+        {
+            if (v[i - 1] != v[i])
+                count++;
+        }
+        cout << count << endl;
+        q--;
         while (q--)
         {
             ll x, y;
             cin >> x >> y;
-            v[x - 1] = y;
-            ll count = 1;
-            for (int i = 1; i < n; i++)
+            if (x != 1 || x != n - 1)
             {
-                if (v[i - 1] != v[i])
+                if (v[x - 1] != v[x - 2])
+                    count--;
+                if (v[x - 1] != v[x])
+                    count--;
+            }
+            v[x - 1] = y;
+            if (x != 1 || x != n - 1)
+            {
+                if (v[x - 1] != v[x - 2])
+                    count++;
+                if (v[x - 1] != v[x])
                     count++;
             }
             cout << count << endl;
