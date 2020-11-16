@@ -20,7 +20,10 @@
     "initializer_list": "cpp",
     "regex": "cpp",
     "valarray": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "chrono": "cpp",
+    "random": "cpp",
+    "limits": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
