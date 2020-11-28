@@ -43,10 +43,16 @@ void solve()
     }
     int ans = 0;
     int fuel = 0;
+    int flag = 1;
     for (int i = 0; i < n; i++)
     {
         fuel += v[i];
-        fuel >= 1 ? ans++ : break;
+        fuel >= 1 ? ans++ : flag = 0;
+        if (flag == 0)
+        {
+            break;
+        }
+        fuel--;
     }
     cout << ans + fuel << endl;
 }
