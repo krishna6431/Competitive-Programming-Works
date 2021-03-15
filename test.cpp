@@ -1,66 +1,12 @@
-// All Important Header Files
-#include <bits/stdc++.h>
-//ALL IMPORTANT MACROS
-#define pb push_back
-#define mp make_pair
-#define fr first
-#define sc second
-#define deb(x) cout << x << endl;
-#define display(start, end) for (int i = start; i < end; i++)
-#define MOD 1000000007
-#define len(x) x.size()
-#define min3(a, b, c) min(a, min(b, c))
-#define max3(a, b, c) max(a, max(b, c))
-#define all(v) v.begin(), v.end()
-#define alla(a, n) a, a + n
-#define endl "\n"
-#define fast                          \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);                    \
-    cout.tie(NULL);
-//USING NAME SPACE
-using namespace std;
-//SOME TYPEDEF DECLARATION
-typedef long long ll;
-typedef unsigned long long ull;
-typedef pair<ll, ll> pll;
-typedef vector<ll> vll;
-typedef vector<pll> vpll;
-typedef vector<vll> vvll;
-typedef vector<string> vs;
-// CODE WRITTEN BY KRISHNA
-
-void solve()
+Problem 3. Given a set of N intervals, find a maximum subset S’ of S such that no pair of intervals in S’ overlaps.
+Algorithm:
+Sort the intervals according to their end points.
+Now, traverse through all the intervals, if we get two overlapping intervals, then greedily choose the interval with lower end point, since choosing it will ensure that intervals further can be accommodated without any overlap.
+Apply the same procedure for all the intervals and print all the intervals which satisfy the above criteria.
+ 
+Pseudo Code:
+Input- The list of intervals and number of intervals.
+maxSubset(intervals, n)
 {
-    int n = 15;
-    while (n)
-    {
-        int t;
-        t = 10;
-        while (t)
-        {
-            int temp = pow(2, t);
-            cout << n << "XOR " << temp << " = " << (n ^ temp) << endl;
-            t--;
-        }
-        cout << endl;
-        n--;
-    }
 }
-
-int main()
-{
-    fast;
-
-    // #ifndef ONLINE_JUDGE
-    //     freopen("../input.txt", "r", stdin);
-    //     freopen("../output.txt", "w", stdout);
-    // #endif
-    // int t;
-    // cin >> t;
-    // while (t--)
-    // {
-    solve();
-    // }
-    return 0;
-}
+Complexity Analysis : Time Complexity : O(N log N)[where N is the number of sets of intervals] Space Complexity : O(1)[No extra space is required]
