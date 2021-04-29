@@ -41,8 +41,8 @@ int main()
     int n, m;
     cin >> n >> m;
 
-    // Declare adjacency matrix
-    int arr[n + 1][n + 1];
+    // Declare adjacency list
+    vector<int> adj[n + 1];
 
     // take edges as input
     for (int i = 0; i < m; i++)
@@ -50,8 +50,8 @@ int main()
         // for undirected graph
         int u, v;
         cin >> u >> v;
-        arr[u][v] = 1;
-        arr[u][v] = 1;
+        adj[u].pb(v);
+        adj[v].pb(u);
     }
     return 0;
 }
