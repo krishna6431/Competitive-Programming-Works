@@ -29,12 +29,7 @@ typedef vector<pll> vpll;
 typedef vector<vll> vvll;
 typedef vector<string> vs;
 // CODE WRITTEN BY KRISHNA_6431
-
-int digit(ll n)
-{
-    int ans = 0;
-    string temp = to_string(n);
-    return temp.size();
+eturn temp.size();
 }
 void solve()
 {
