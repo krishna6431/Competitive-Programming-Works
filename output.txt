@@ -1,1 +1,3 @@
-Cycle Exists
+Case #1: 2
+Case #2: 4
+Case #3: 84
