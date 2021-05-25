@@ -30,26 +30,52 @@ typedef vector<vll> vvll;
 typedef vector<string> vs;
 // CODE WRITTEN BY KRISHNA_6431
 
-void solve()
+vector<string> fizzbuzz(int n)
 {
+    vector<string> ans;
+    for (int i = 1; i <= n; i++)
+    {
+        if (i % 15 == 0)
+        {
+            ans.push_back("FizzBuzz");
+        }
+        else if (i % 3 == 0)
+        {
+            ans.push_back("Fizz");
+        }
+        else if (i % 5 == 0)
+        {
+            ans.push_back("Buzz");
+        }
+        else
+        {
+            ans.push_back(to_string(i));
+        }
+    }
+    return ans;
 }
 
 int main()
 {
     fast;
 
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
+    // #ifndef ONLINE_JUDGE
+    //     freopen("./input.txt", "r", stdin);
+    //     freopen("./output.txt", "w", stdout);
+    // #endif
     int t;
     cin >> t;
-    int tc = 1;
     while (t--)
     {
-        cout << "Case #" << tc << ": ";
-        tc++;
-        solve();
+        int n;
+        cin >> n;
+        vector<string> ans = fizzbuzz(n);
+        cout << "{";
+        for (auto x : ans)
+        {
+            cout << x << ",";
+        }
+        cout << "}" << endl;
     }
     return 0;
 }
