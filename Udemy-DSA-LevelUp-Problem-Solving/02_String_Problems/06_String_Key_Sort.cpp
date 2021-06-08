@@ -32,44 +32,46 @@ typedef vector<pll> vpll;
 typedef vector<vll> vvll;
 typedef vector<string> vs;
 // code is written by mr_krishna
-void resetInput()
+
+string extractStringAtKey(string str, int key)
 {
-    static char *input = NULL;
-}
-char *mystrtok(char *str, char delim)
-{
-    static char *input = NULL; // create static so that it maintains the state of string
-    if (str != NULL)
+    // string tokenizer
+    char *s = strtok((char *)str.c_str(), " ");
+    while (key > 1)
     {
-        input = str;
+        s = strtok(NULL, " ");
+        key--;
     }
-    if (input == NULL) // if input pointint ot null return null
-    {
-        return NULL;
-    }
-    char *token = new char[strlen(input) + 1]; // crate dynamically so that we can retutn it;
-    int i = 0;
-    for (; input[i] != '\0'; i++)
-    {
-        if (input[i] != delim)
-        {
-            token[i] = input[i];
-        }
-        else
-        {
-            token[i] = '\0';
-            input = input + i + 1;
-            return token;
-        }
-    }
-    //set null to last token of string
-    token[i] = '\0';
-    //reset input to NULL
-    input = NULL;
-    delete input;
-    return token;
+    return (string)s;
 }
 
+int convertToInt(string key)
+{
+    int ans = 0;
+    int p = 1;
+    for (int i = key.size() - 1; i >= 0; i--)
+    {
+        ans += (key[i] - '0') * p;
+        p *= 10;
+    }
+    return ans;
+}
+
+bool lexicoCompare(pair<string, string> s1, pair<string, string> s2)
+{
+    string key1, key2;
+    key1 = s1.second;
+    key2 = s2.second;
+    return key1 < key2;
+}
+
+bool numericCompare(pair<string, string> s1, pair<string, string> s2)
+{
+    string key1, key2;
+    key1 = s1.second;
+    key2 = s2.second;
+    return convertToInt(key1) < convertToInt(key2);
+}
 int main()
 {
     fast;
@@ -83,19 +85,51 @@ int main()
     int tc = 1;
     while (t--)
     {
-        cout << "Case #" << tc++ << ":";
-        char in[1000];
-        cin.getline(in, 1000, '#');
-        //strtok
-        char *token = mystrtok(in, ' ');
-        cout << token << ",";
-        while (token != NULL)
+        cout << "Case #" << tc++ << ":" << endl;
+        int n;
+        cin >> n;
+        cin.get(); // consumes the extra '\n';
+        string str;
+        vector<string> v;
+        for (int i = 0; i < n; i++)
         {
-            token = mystrtok(NULL, ' ');
-            cout << token << ",";
+            getline(cin, str);
+            v.push_back(str);
         }
-        cout << endl;
-        static char *input = NULL;
+        int key;
+        string reversal, ordering;
+        cin >> key >> reversal >> ordering;
+
+        //1. to extract tokens
+        vector<pair<string, string>> vp;
+        for (int i = 0; i < n; i++)
+        {
+            vp.push_back({v[i], extractStringAtKey(v[i], key)});
+        }
+
+        //2. Sorting
+        if (ordering == "numeric")
+        {
+            sort(all(vp), numericCompare);
+        }
+        else
+        {
+            sort(all(vp), lexicoCompare);
+        }
+
+        //3.Reversal
+        if (reversal == "true")
+        {
+            reverse(all(vp));
+        }
+
+        //4: Printing
+        // for (int i = 0; i < vp.size(); i++)
+        // {
+        //     cout << vp[i].first << " " << vp[i].second << endl;
+        // }
+        for (auto x : vp)
+            cout << x.first << endl;
     }
     return 0;
 }
