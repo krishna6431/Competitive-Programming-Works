@@ -20,7 +20,9 @@ public:
         ListNode *two = head;
         for (int i = 0; i < k; i++)
             two = two->next;
-        if(two==NULL) return one->next;
+        if(two==NULL) {
+            return one->next;
+        }    
         while (two->next)
         {
             one = one->next;
