@@ -52,7 +52,7 @@ Sample Output:
 
 /*
 Time Complexity:O(n^2)
-Space Complexity:O(1)
+Space Complexity:O(n)
 */
 
 //function for finding plots of lands equal to
