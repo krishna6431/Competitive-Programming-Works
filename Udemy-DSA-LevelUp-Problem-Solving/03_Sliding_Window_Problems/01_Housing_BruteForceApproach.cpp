@@ -50,6 +50,11 @@ Sample Output:
 5 9
 */
 
+/*
+Time Complexity:O(n^3)
+Space Complexity:O(1)
+*/
+
 //function for finding plots of lands equal to k
 vector<pair<int, int>> brute_housing(vector<int> v, int k)
 {
