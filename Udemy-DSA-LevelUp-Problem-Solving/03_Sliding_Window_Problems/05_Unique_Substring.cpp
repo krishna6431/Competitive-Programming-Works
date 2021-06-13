@@ -51,33 +51,40 @@ abc
 
 /*
 Time Complexity:O(n)
-Space Complexity:O(1)
+Space Complexity:O(n)
 */
 
-//function for finding plots of lands equal to
-//two pointer approach
-vector<pair<int, int>> optimizedHousing(vector<int> v, int k, int n)
+// function for finding unique window
+string uniqueWindow(string input)
 {
-    vector<pair<int, int>> ans;
-    int sum = 0;
     int i = 0, j = 0;
-
-    while (j < n)
+    int window_len = 0;
+    int max_window_len = 0;
+    int start_window = -1;
+    unordered_map<char, int> umap;
+    while (j < input.size())
     {
-        sum += v[j];
-        j++;
-        while (sum > k and i < j)
+        char ch = input[j];
+        // if its inside hashamap anf its idx >= start of window
+        if (umap.count(ch) and umap[ch] >= i)
         {
-            sum -= v[i];
-            i++;
+            i = umap[ch] + 1;
+            window_len = j - i; //updated remaining window
         }
-        if (sum == k)
+
+        //update last occurance
+        umap[ch] = j;
+        window_len++;
+        j++;
+
+        //update max_window_len at everytime
+        if (window_len > max_window_len)
         {
-            // cout << i << j;
-            ans.push_back({i, j - 1});
+            max_window_len = window_len;
+            start_window = i;
         }
     }
-    return ans;
+    return input.substr(start_window, max_window_len);
 }
 
 int main()
@@ -94,20 +101,9 @@ int main()
     while (t--)
     {
         cout << "Case #" << tc++ << ":" << endl;
-        int n, k;
-        cin >> n >> k;
-        vector<int> input;
-        int temp;
-        for (int i = 0; i < n; i++)
-        {
-            cin >> temp;
-            input.push_back(temp);
-        }
-        vector<pair<int, int>> ans = optimizedHousing(input, k, n);
-        for (auto x : ans)
-        {
-            cout << x.first << " " << x.second << endl;
-        }
+        string input;
+        cin >> input;
+        cout << uniqueWindow(input) << endl;
     }
     return 0;
 }
