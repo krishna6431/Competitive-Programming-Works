@@ -35,57 +35,73 @@ typedef vector<string> vs;
 
 //Problem Description
 /*
-Given two strings, one big string and one small string, find the 'smallest window' in the big string
-that contains all characters of the small string.
---> Window can have additinal chracters than required.
---> If small string has duplicates, then those duplicates must be present with same or higher count in window
+Implementing Merge Sort 
 */
 
 /*
 Sample Input:
-hello_world
-lol
+8 9 7 6 5 4
 
 Sample Output:
-llo
+4 5 6 7 8 9
 */
 
 /*
-Time Complexity:O(n)
+Time Complexity:O(nlogn)
 Space Complexity:O(n)
 */
 
-// function for finding unique window
-string uniqueWindow(string input)
+//helper method
+void merge(vector<int> &array, int s, int e)
 {
-    int i = 0, j = 0;
-    int window_len = 0;
-    int max_window_len = 0;
-    int start_window = -1;
-    unordered_map<char, int> umap;
-    while (j < input.size())
+    int i = s;
+    int m = (s + e) / 2;
+    int j = m + 1;
+    vector<int> temp;
+    while (i <= m and j <= e)
     {
-        char ch = input[j];
-        // if its inside hashamap anf its idx >= start of window
-        if (umap.count(ch) and umap[ch] >= i)
+        if (array[i] < array[j])
         {
-            i = umap[ch] + 1;
-            window_len = j - i; //updated remaining window
+            temp.push_back(array[i]);
+            i++;
         }
-
-        //update last occurance
-        umap[ch] = j;
-        window_len++;
-        j++;
-
-        //update max_window_len at everytime
-        if (window_len > max_window_len)
+        else
         {
-            max_window_len = window_len;
-            start_window = i;
+            temp.push_back(array[j]);
+            j++;
         }
     }
-    return input.substr(start_window, max_window_len);
+    //this loop add remaining elements from first array
+    while (i <= m)
+    {
+        temp.push_back(array[i++]);
+    }
+    //this loop add remaining elements from second array
+    while (j <= e)
+    {
+        temp.push_back(array[j++]);
+    }
+    //copy back all elements to original array
+    int k = 0;
+    for (int idx = s; idx <= e; idx++)
+    {
+        array[idx] = temp[k++];
+    }
+}
+
+//Sorting Method
+void mergeSort(vector<int> &array, int s, int e)
+{
+    //base case
+    if (s >= e)
+    {
+        return;
+    }
+    //rec case
+    int mid = (s + e) / 2;
+    mergeSort(array, s, mid);
+    mergeSort(array, mid + 1, e);
+    return merge(array, s, e);
 }
 
 int main()
@@ -102,9 +118,19 @@ int main()
     while (t--)
     {
         cout << "Case #" << tc++ << ":" << endl;
-        string input;
-        cin >> input;
-        cout << uniqueWindow(input) << endl;
+        int n;
+        cin >> n;
+        vector<int> arr;
+        int temp;
+        for (int i = 0; i < n; i++)
+        {
+            cin >> temp;
+            arr.push_back(temp);
+        }
+        merge(arr, 0, n - 1);
+        for (auto x : arr)
+            cout << x << " ";
+        cout << endl;
     }
     return 0;
 }
