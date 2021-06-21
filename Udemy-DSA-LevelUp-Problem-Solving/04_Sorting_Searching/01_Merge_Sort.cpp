@@ -54,6 +54,7 @@ Space Complexity:O(n)
 //helper method
 void merge(vector<int> &array, int s, int e)
 {
+    //something happening wrong with this code
     int i = s;
     int m = (s + e) / 2;
     int j = m + 1;
