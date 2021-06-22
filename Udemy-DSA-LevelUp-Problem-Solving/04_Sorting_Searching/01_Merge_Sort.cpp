@@ -127,7 +127,7 @@ int main()
             cin >> temp;
             arr.push_back(temp);
         }
-        merge(arr, 0, n - 1);
+        mergeSort(arr, 0, n - 1);
         for (auto x : arr)
             cout << x << " ";
         cout << endl;
