@@ -35,7 +35,7 @@ typedef vector<string> vs;
 
 //Problem Description
 /*
-Count Inversion Count
+Implement Quick Sort Algorithm
 */
 
 /*
@@ -43,71 +43,42 @@ Sample Input:
 10 5 2 0 7 6 4
 
 Sample Output:
-13
+0 2 4 5 6 7 10
 */
 
 /*
-Time Complexity:O(nlogn)
-Space Complexity:O(n)
+Time Complexity:O(nlogn) Best case
+Time Complexity:O(n^2) Worst Case
+Space Complexity:O(1)
 */
-//brute force solution is findind all pair (tc = o(n^2))
 
-//helper method
-int crossInversion(vector<int> &array, int s, int e)
+int partition(vector<int> &arr, int s, int e)
 {
-    //something happening wrong with this code
-    int i = s;
-    int m = (s + e) / 2;
-    int j = m + 1;
-    vector<int> temp;
-    int count = 0;
-    while (i <= m and j <= e)
+    int pivot = arr[e];
+    int i = s - 1;
+    for (int j = s; j < e; j++)
     {
-        if (array[i] < array[j])
+        if (arr[j] < pivot)
         {
-            temp.push_back(array[i]);
             i++;
-        }
-        else
-        {
-            count += m - i + 1;
-            temp.push_back(array[j]);
-            j++;
+            swap(arr[i], arr[j]);
         }
     }
-    //this loop add remaining elements from first array
-    while (i <= m)
-    {
-        temp.push_back(array[i++]);
-    }
-    //this loop add remaining elements from second array
-    while (j <= e)
-    {
-        temp.push_back(array[j++]);
-    }
-    //copy back all elements to original array
-    int k = 0;
-    for (int idx = s; idx <= e; idx++)
-    {
-        array[idx] = temp[k++];
-    }
-    return count;
+    swap(arr[i + 1], arr[e]);
+    return i + 1;
 }
 
-// inversion count recursive function
-int inversionCount(vector<int> &array, int s, int e)
+void quickSort(vector<int> &arr, int s, int e)
 {
-    //base case
+    //Base Case
     if (s >= e)
     {
-        return 0;
+        return;
     }
-    //rec case
-    int mid = (s + e) / 2;
-    int c1 = inversionCount(array, s, mid);
-    int c2 = inversionCount(array, mid + 1, e);
-    int ci = crossInversion(array, s, e);
-    return c1 + c2 + ci;
+    //recursive case
+    int p = partition(arr, s, e);
+    quickSort(arr, 0, p - 1);
+    quickSort(arr, p + 1, e);
 }
 
 int main()
@@ -133,7 +104,12 @@ int main()
             cin >> temp;
             arr.push_back(temp);
         }
-        cout << inversionCount(arr, 0, n - 1) << endl;
+        quickSort(arr, 0, n - 1);
+        for (auto x : arr)
+        {
+            cout << x << " ";
+        }
+        cout << endl;
     }
     return 0;
 }
