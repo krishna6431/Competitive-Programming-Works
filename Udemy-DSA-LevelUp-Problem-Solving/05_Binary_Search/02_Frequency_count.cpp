@@ -64,7 +64,7 @@ int lowerBound(vector<int> &arr, int key)
         if (arr[mid] == key)
         {
             ans = mid;
-            mid = end - 1;
+            end = mid - 1;
         }
         else if (arr[mid] > key)
         {
