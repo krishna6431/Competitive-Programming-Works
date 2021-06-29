@@ -54,12 +54,13 @@ Space Complexity:O(1)
 float squareRoot(int n, int p)
 {
     //BinarySearch(for integer part)
-    int start = 1;
+    int start = 0;
     int end = n;
-    int mid = (start + end) / 2;
-    int ans = -1;
-    while (s <= e)
+    float ans = -1;
+    int mid;
+    while (start <= end)
     {
+        mid = (start + end) / 2;
         if (mid * mid == n)
         {
             return mid;
@@ -79,7 +80,7 @@ float squareRoot(int n, int p)
     float inc = 0.1;
     for (int place = 1; place <= p; place++)
     {
-        while (mid * mid <= n)
+        while (ans * ans <= n)
         {
             ans += inc;
         }
