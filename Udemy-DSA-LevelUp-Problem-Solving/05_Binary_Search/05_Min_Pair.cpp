@@ -78,7 +78,7 @@ void minPair(vector<int> a1, vector<int> a2)
             minDiff = abs(x - a2[lb]);
         }
     }
-    cout << "Min Pair is: " << p1 << "and" << p2 << endl;
+    cout << "Min Pair is: " << p1 << " and " << p2 << endl;
 }
 int main()
 {
