@@ -47,8 +47,8 @@ Sample Output:
 */
 
 /*
-Time Complexity:O(MlogM+NlogM)
-Space Complexity:O(1)
+Time Complexity:O(3^n)
+Space Complexity:O(n)
 */
 
 int countWays(int n)
