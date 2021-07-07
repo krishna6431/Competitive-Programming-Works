@@ -35,18 +35,15 @@ typedef vector<string> vs;
 
 //Problem Description
 /*
-Given two non-empty arrays, find the pair of numbers(one from each array) whose absolute differance is minimum. Print the any one pair with the smallest difference.
-
-ans|a-b| -> min
+Given a ladder containing N steps, you can take a jump of 1,2 or 3 at each step.Find the number of ways to climb the ladder.
 */
 
 /*
 Sample Input:
-a1=[-1,5,10,20,3]
-a2=[26,134,135,15,17]
+N=4
 
 Sample Output:
-[20,17]
+7
 */
 
 /*
@@ -54,32 +51,22 @@ Time Complexity:O(MlogM+NlogM)
 Space Complexity:O(1)
 */
 
-void minPair(vector<int> a1, vector<int> a2)
+int countWays(int n)
 {
-    //sort the array
-    sort(a2.begin(), a2.end());
-    int p1, p2;
-    int minDiff = INT_MAX;
-
-    //iterate over 1 array and look for closest element in second array
-    for (auto x : a1)
+    //Base
+    if (n < 0)
     {
-        auto lb = lower_bound(a2.begin(), a2.end(), x) - a2.begin();
-        if (lb >= 1 and abs(x - a2[lb - 1]) < minDiff)
-        {
-            p1 = x;
-            p2 = a2[lb - 1];
-            minDiff = abs(x - a2[lb - 1]);
-        }
-        if (lb != a2.size() and abs(x - a2[lb]) < minDiff)
-        {
-            p1 = x;
-            p2 = a2[lb];
-            minDiff = abs(x - a2[lb]);
-        }
+        return 0;
     }
-    cout << "Min Pair is: " << p1 << " and " << p2 << endl;
+    if (n == 0)
+    {
+        return 1;
+    }
+
+    //recursive case
+    return countWays(n - 1) + countWays(n - 2) + countWays(n - 3);
 }
+
 int main()
 {
     fast;
@@ -94,18 +81,9 @@ int main()
     while (t--)
     {
         cout << "Case #" << tc++ << ":" << endl;
-        int n1, n2;
-        cin >> n1 >> n2;
-        vector<int> v1(n1), v2(n2);
-        for (int i = 0; i < n1; i++)
-        {
-            cin >> v1[i];
-        }
-        for (int i = 0; i < n2; i++)
-        {
-            cin >> v2[i];
-        }
-        minPair(v1, v2);
+        int n;
+        cin >> n;
+        cout << "No of Ways: " << countWays(n) << endl;
     }
     return 0;
 }
