@@ -35,16 +35,16 @@ typedef vector<string> vs;
 
 //Problem Description
 /*
-Given a set of non-negative integers, and a value sum, determine of there is a subset of the given set with sum equal to given sum.
+Write a function to generate all possible n pairs of balanced parentheses '(' and ')'
 */
 
 /*
 Sample Input:
-arr = [10,12,15,6,4,20]
-sum = 16
+2
 
 Sample Output:
-2 {(10,6),(12,4)}
+()()
+(())
 */
 
 /*
@@ -52,23 +52,26 @@ Time Complexity:O(2^n)
 Space Complexity:O(n)
 */
 
-int countSubsets(vector<int> arr, int n, int i, int sum)
+void generateBrackets(string output, int n, int open, int close, int i)
 {
-    //Base
-    if (i == n)
+    //base case
+    if (i == 2 * n)
     {
-        if (sum == 0)
-        {
-            return 1;
-        }
-        return 0;
+        cout << output << endl;
+        return;
     }
 
-    //recursive case
-    int inc = countSubsets(arr, n, i + 1, sum - arr[i]); //include case
-    int exc = countSubsets(arr, n, i + 1, sum);          //exclude case
+    //place openening bracket
+    if (open < n)
+    {
+        generateBrackets(output + '(', n, open + 1, close, i + 1);
+    }
 
-    return inc + exc;
+    //place closing bracket
+    if (close < open)
+    {
+        generateBrackets(output + ')', n, open, close + 1, i + 1);
+    }
 }
 
 int main()
@@ -85,16 +88,10 @@ int main()
     while (t--)
     {
         cout << "Case #" << tc++ << ":" << endl;
+        string output;
         int n;
         cin >> n;
-        vector<int> in(n);
-        int sum;
-        cin >> sum;
-        for (int i = 0; i < n; i++)
-        {
-            cin >> in[i];
-        }
-        cout << countSubsets(in, n, 0, sum) << endl;
+        generateBrackets(output, n, 0, 0, 0);
     }
     return 0;
 }
