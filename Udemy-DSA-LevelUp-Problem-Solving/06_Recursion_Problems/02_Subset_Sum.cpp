@@ -40,11 +40,11 @@ Given a set of non-negative integers, and a value sum, determine of there is a s
 
 /*
 Sample Input:
-arr = [10,12,15,6,19,20]
+arr = [10,12,15,6,4,20]
 sum = 16
 
 Sample Output:
-YES
+2 {(10,6),(12,4)}
 */
 
 /*
