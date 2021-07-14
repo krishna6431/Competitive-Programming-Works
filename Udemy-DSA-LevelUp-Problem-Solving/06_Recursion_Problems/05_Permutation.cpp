@@ -35,55 +35,47 @@ typedef vector<string> vs;
 
 //Problem Description
 /*
-Given a number N and a modern phone keypad. Find out all possible strings generated using that number.
-
-2--> ABC
-3--> DEF
-4--> GHI
-5--> JKL
-6--> MNO
-7--> PQRS
-8--> TUV
-9--> WXYZ
+Find all permutation of a string 
 */
 
 /*
 Sample Input:
-23
+ABC
 
 Sample Output:
-AD AE AF BD BE BF CD CE CF
+ABC
+ACB
+BAC
+BCA
+CBA
+CAB
 */
 
 /*
-Time Complexity:
+Time Complexity: O(n*n!)
 Space Complexity:
 */
 
-string keypad[] = {"", "", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
-
-void printKeyBoardOutput(string input, string output, int i = 0)
+void permute(string str, int l, int r)
 {
-    //base case
-    if (input[i] == '\0')
+    // base case
+    if (l == r)
     {
-        cout << output << endl;
-        return;
+        cout << str << endl;
     }
-
-    // rec case
-    int current_digit = input[i] - '0';
-    if (current_digit == 0 or current_digit == 1)
+    else
     {
-        printKeyBoardOutput(input, output, i + 1);
+        //permutation made
+        for (int i = l; i <= r; i++)
+        {
+            // swap case
+            swap(str[l], str[i]);
+            // recursion
+            permute(str, l + 1, r);
+            //backtrack
+            swap(str[l], str[i]);
+        }
     }
-
-    //keypad
-    for (int k = 0; k < keypad[current_digit].size(); k++)
-    {
-        printKeyBoardOutput(input, output + keypad[current_digit][k], i + 1);
-    }
-    return;
 }
 
 int main()
@@ -102,8 +94,7 @@ int main()
         cout << "Case #" << tc++ << ":" << endl;
         string input;
         cin >> input;
-        string output;
-        printKeyBoardOutput(input, output);
+        permute(input, 0, input.size() - 1);
     }
     return 0;
 }
