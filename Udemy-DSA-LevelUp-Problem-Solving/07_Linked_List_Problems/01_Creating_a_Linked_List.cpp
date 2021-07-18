@@ -63,9 +63,10 @@ void printLinkedList(node *head)
 {
     while (head != NULL)
     {
-        cout << head->data << endl;
+        cout << head->data << "-->";
         head = head->next;
     }
+    cout << "NULL" << endl;
 }
 
 int main()
@@ -91,6 +92,7 @@ int main()
             cin >> temp;
             insertAtHead(head, temp);
         }
+        printLinkedList(head);
     }
     return 0;
 }
