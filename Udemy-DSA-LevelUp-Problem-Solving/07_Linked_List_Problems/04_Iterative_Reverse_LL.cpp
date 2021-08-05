@@ -140,9 +140,9 @@ node *iterReverse(node *head)
     }
     return prev;
 }
+
 int main()
 {
-
     fast;
 
     // #ifndef ONLINE_JUDGE
@@ -160,6 +160,7 @@ int main()
         cin >> n;
         int temp;
         for (int i = 0; i < n; i++)
+        {
             cin >> temp;
             insertAtHead(head, temp);
         }
@@ -167,10 +168,10 @@ int main()
         //inseting at given pos
         insertInMiddle(head, 100, 3);
         printLinkedList(head);
-        node *newHead = recReverse(head);
-        printLinkedList(newHead);
-        node *newHead1 = iterReverse(newHead);
-        printLinkedList(newHead1);
+        head = recReverse(head);
+        printLinkedList(head);
+        head = iterReverse(head);
+        printLinkedList(head);
     }
     return 0;
 }
