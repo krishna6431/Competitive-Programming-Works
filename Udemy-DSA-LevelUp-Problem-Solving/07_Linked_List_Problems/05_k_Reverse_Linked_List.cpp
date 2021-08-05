@@ -161,6 +161,7 @@ node *kReverse(node *head, int k)
         current->next = prev;
         prev = current;
         current = temp;
+        count++;
     }
 
     if (temp != NULL)
