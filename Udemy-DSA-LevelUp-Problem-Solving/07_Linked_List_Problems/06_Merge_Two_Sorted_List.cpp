@@ -35,21 +35,21 @@ typedef vector<string> vs;
 
 //Problem Description
 /*
-Given a Linked list , Write a Function to reverse every k nodes(where k is an input to the function)
+Given Two sorted Linked list your task is to merge these two sorted linked lists to a single sorted linkedlist
 */
 
 /*
 Sample Input:
-1->2->3->4->5
-k=3
+1->3->5->7->9
+2->4->6->8->10
 
 Sample Output:
-3->2->1->5->4
+1->2->3->4->5->6->7->8->9->10;
 */
 
 /*
-Time Complexity:O(n)
-Space Complexity:O(1)
+Time Complexity:O(n+m)
+Space Complexity:O(n+m)
 */
 
 class node
