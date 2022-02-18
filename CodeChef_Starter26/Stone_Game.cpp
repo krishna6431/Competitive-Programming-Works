@@ -54,25 +54,51 @@ void solve()
 {
     int n;
     cin >> n;
-    string s1, s2;
+    string s1;
+    string s2;
+
     cin >> s1 >> s2;
+
+    int startA = 0, endA = n - 1;
+    int startB = 0, endB = n - 1;
+
+    vector<char> ans(2 * n);
+    int front = 0, back = 2 * n - 1;
+
     sort(s1.begin(), s1.end());
-    sort(s2.begin(), s2.end(), greater<ll>());
-    string ans;
-    int j1 = 0, j2 = 0;
+    sort(s2.begin(), s2.end(), greater<char>());
+
     for (int i = 0; i < 2 * n; i++)
     {
-        if (i % 2 == 0)
-        {
-            ans.push_back(s1[j1++]);
+        if ((i % 2) == 0)
+        { // Current Turn = Alice
+            if (startB <= endB && s1[startA] >= s2[startB])
+            {
+                ans[back--] = s1[endA--];
+            }
+            else
+            {
+                ans[front++] = s1[startA++];
+            }
         }
         else
-        {
-            ans.push_back(s2[j2++]);
+        { // Bob Turn
+            if (startA <= endA && s1[startA] < s2[startB])
+            {
+                ans[front++] = s2[startB++];
+            }
+            else
+            {
+                ans[back--] = s2[endB--];
+            }
         }
     }
 
-    cout << ans << endl;
+    for (auto x : ans)
+    {
+        cout << x;
+    }
+    cout << endl;
 }
 
 int main()
