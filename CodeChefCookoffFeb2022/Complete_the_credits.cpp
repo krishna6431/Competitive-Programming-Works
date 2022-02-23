@@ -56,7 +56,15 @@ void solve()
     cin >> n;
     if (n > 65)
     {
-        cout << "OVERLOAD" << endl;
+        cout << "Overload" << endl;
+    }
+    else if (n < 35)
+    {
+        cout << "Underload" << endl;
+    }
+    else
+    {
+        cout << "Normal" << endl;
     }
 }
 
