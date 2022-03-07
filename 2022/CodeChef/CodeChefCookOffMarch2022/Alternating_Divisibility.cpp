@@ -49,65 +49,32 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args)
     __f(comma + 1, args...);
 }
 
-bool check(vector<ll> &v, int first, int last)
-{
-    sort(v.begin() + first, v.begin() + last + 1);
-    if (is_sorted(v.begin(), v.end()))
-        return 1;
-    return 0;
-}
 // CODE WRITTEN BY mr_krishna/krishna_6431
 void solve()
 {
-    ll n;
+    int n;
     cin >> n;
-    vector<ll> v(n);
-    string str;
-    for (int i = 0; i < n; i++)
+    vector<int> v(n);
+    ll k = 2 * n;
+    for (int i = n - 1; i >= 0; i -= 2)
     {
-        cin >> v[i];
-    }
-    cin >> str;
-    ll n_s = 0;
-    for (int i = 0; i < str.size(); i++)
-    {
-        if (str[i] == 'N')
-            n_s++;
-    }
-    if (n_s == 0 or n_s == n)
-    {
-        cout << -1 << endl;
-        return;
-    }
-
-    if (is_sorted(v.begin(), v.end()))
-    {
-        cout << 0 << endl;
-        return;
-    }
-    ll firstN = -1, lastN = -1, firstS = -1, lastS = -1;
-    ll ans = 2;
-    for (int i = 0; i < str.size(); i++)
-    {
-        if (str[i] == 'N')
+        if (i & 1)
         {
-            if (firstN == -1)
-                firstN = i;
-            lastN = i;
+            v[i] = k;
+            v[i - 1] = k / 2;
         }
         else
         {
-            if (firstS == -1)
-                firstS = i;
-            firstS = i;
+            v[i++] = k / 2;
         }
+        k -= 2;
     }
 
-    if (check(v, firstN, lastS) == 1 || check(v, firstS, lastN) == 1)
+    for (auto x : v)
     {
-        ans = 1;
+        cout << x << " ";
     }
-    cout << ans << endl;
+    cout << endl;
 }
 
 int main()

@@ -49,64 +49,15 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args)
     __f(comma + 1, args...);
 }
 
-bool check(vector<ll> &v, int first, int last)
-{
-    sort(v.begin() + first, v.begin() + last + 1);
-    if (is_sorted(v.begin(), v.end()))
-        return 1;
-    return 0;
-}
 // CODE WRITTEN BY mr_krishna/krishna_6431
 void solve()
 {
-    ll n;
-    cin >> n;
-    vector<ll> v(n);
-    string str;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
-    cin >> str;
-    ll n_s = 0;
-    for (int i = 0; i < str.size(); i++)
-    {
-        if (str[i] == 'N')
-            n_s++;
-    }
-    if (n_s == 0 or n_s == n)
-    {
-        cout << -1 << endl;
-        return;
-    }
-
-    if (is_sorted(v.begin(), v.end()))
-    {
-        cout << 0 << endl;
-        return;
-    }
-    ll firstN = -1, lastN = -1, firstS = -1, lastS = -1;
-    ll ans = 2;
-    for (int i = 0; i < str.size(); i++)
-    {
-        if (str[i] == 'N')
-        {
-            if (firstN == -1)
-                firstN = i;
-            lastN = i;
-        }
-        else
-        {
-            if (firstS == -1)
-                firstS = i;
-            firstS = i;
-        }
-    }
-
-    if (check(v, firstN, lastS) == 1 || check(v, firstS, lastN) == 1)
-    {
-        ans = 1;
-    }
+    int x, a, b, c;
+    cin >> x >> a >> b >> c;
+    int mini = min3(a, b, c);
+    int maxi = max3(a, b, c);
+    int secondM = (a + b + c) - (maxi + mini);
+    int ans = secondM + (x - 1) * mini;
     cout << ans << endl;
 }
 

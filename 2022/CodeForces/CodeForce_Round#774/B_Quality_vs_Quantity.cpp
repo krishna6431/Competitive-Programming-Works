@@ -49,65 +49,41 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args)
     __f(comma + 1, args...);
 }
 
-bool check(vector<ll> &v, int first, int last)
-{
-    sort(v.begin() + first, v.begin() + last + 1);
-    if (is_sorted(v.begin(), v.end()))
-        return 1;
-    return 0;
-}
 // CODE WRITTEN BY mr_krishna/krishna_6431
 void solve()
 {
     ll n;
     cin >> n;
     vector<ll> v(n);
-    string str;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> v[i];
-    }
-    cin >> str;
-    ll n_s = 0;
-    for (int i = 0; i < str.size(); i++)
-    {
-        if (str[i] == 'N')
-            n_s++;
-    }
-    if (n_s == 0 or n_s == n)
-    {
-        cout << -1 << endl;
-        return;
-    }
+    for (auto &x : v)
+        cin >> x;
+    sort(all(v));
 
-    if (is_sorted(v.begin(), v.end()))
+    // for (auto x : v)
+    //     cout << x << " ";
+    // cout << endl;
+    if (v[0] + v[1] < v[n - 1])
     {
-        cout << 0 << endl;
-        return;
+        cout << "YES" << endl;
     }
-    ll firstN = -1, lastN = -1, firstS = -1, lastS = -1;
-    ll ans = 2;
-    for (int i = 0; i < str.size(); i++)
+    else
     {
-        if (str[i] == 'N')
+        ll l_sum = v[0] + v[1];
+        ll r_sum = v[n - 1];
+        ll i = 2;
+        ll j = n - 2;
+        while (i < j)
         {
-            if (firstN == -1)
-                firstN = i;
-            lastN = i;
+            l_sum += v[i++];
+            r_sum += v[j--];
+            if (r_sum > l_sum)
+            {
+                cout << "YES" << endl;
+                return;
+            }
         }
-        else
-        {
-            if (firstS == -1)
-                firstS = i;
-            firstS = i;
-        }
+        cout << "NO" << endl;
     }
-
-    if (check(v, firstN, lastS) == 1 || check(v, firstS, lastN) == 1)
-    {
-        ans = 1;
-    }
-    cout << ans << endl;
 }
 
 int main()
