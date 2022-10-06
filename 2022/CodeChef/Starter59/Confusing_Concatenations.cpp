@@ -54,7 +54,55 @@ void solve()
 {
     ll n;
     cin >> n;
-    cout << 2 * n * 5 << endl;
+    vector<ll> v(n);
+    vector<ll> ans1;
+    vector<ll> ans2;
+    for (auto &x : v)
+        cin >> x;
+    if (*max_element(all(v)) == v[0])
+    {
+        cout << -1 << endl;
+        return;
+    }
+    else
+    {
+        ll m = v[0];
+        ll idx = -1;
+        for (ll i = 1; i < n; i++)
+        {
+            if (v[i] > m)
+            {
+                idx = i;
+                break;
+            }
+        }
+        for (ll i = 0; i < idx; i++)
+        {
+            ans1.pb(v[i]);
+        }
+        for (ll i = idx; i < n; i++)
+        {
+            ans2.pb(v[i]);
+        }
+    }
+    for (ll i = 0; i < ans1.size(); i++)
+    {
+        if (ans2[0] == ans1[i])
+        {
+            cout << -1 << endl;
+            return;
+        }
+    }
+    cout << ans1.size() << endl;
+    for (auto x : ans1)
+        cout << x << " ";
+    cout << endl;
+    cout << ans2.size() << endl;
+    for (auto x : ans2)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
 }
 
 int main()
@@ -70,7 +118,7 @@ int main()
     int tc = 1;
     while (t--)
     {
-        // cout << "Case #" << tc << ": ";
+        // cout << "Case #" << tc << ": " << endl;
         tc++;
         solve();
     }
