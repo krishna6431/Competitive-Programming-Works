@@ -1,0 +1,1 @@
+{"name":"Local: arrcons","url":"/home/krishna/Competitive-Programming-Works/arrcons.py","tests":[{"id":1665583114641,"input":"2\n2 2\n100 125","output":"3\n12"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Competitive-Programming-Works/arrcons.py","group":"local","local":true}
