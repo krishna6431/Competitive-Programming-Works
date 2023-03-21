@@ -18,7 +18,7 @@
 #define all(v) v.begin(), v.end()
 #define alla(a, n) a, a + n
 #define endl "\n"
-#define fast                          \
+#define RadheKrishna                  \
     ios_base::sync_with_stdio(false); \
     cin.tie(NULL);                    \
     cout.tie(NULL);
@@ -49,37 +49,55 @@ void __f(const char *names, Arg1 &&arg1, Args &&...args)
     __f(comma + 1, args...);
 }
 
-// CODE WRITTEN BY mr_krishna/krishna_6431
-void solve()
+// CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
+void HarHarMahadev()
 {
     ll n;
     cin >> n;
-    unordered_set<ll> s;
-    ll temp;
-    loop(0, n, 1)
+    if (n == 2)
     {
-        cin >> temp;
-        s.insert(temp);
+        cout << -1 << endl;
+        return;
     }
-    cout << s.size() << endl;
+    ll one = 0;
+    for (int i = 0; i < n; i++)
+    {
+        ll oneprint = one;
+        while (oneprint--)
+        {
+            cout << 1 << "";
+        }
+        ll zeroprint = n - one;
+        if (i == 0)
+        {
+            cout << "01";
+            zeroprint -= 2;
+        }
+        while (zeroprint--)
+        {
+            cout << 0 << "";
+        }
+        cout << endl;
+        one = one + 1;
+    }
 }
 
 int main()
 {
-    fast;
+    RadheKrishna;
 
     // #ifndef ONLINE_JUDGE
     //     freopen("input.txt", "r", stdin);
     //     freopen("output.txt", "w", stdout);
     // #endif
-    int t = 1;
-    // cin >> t;
-    int tc = 1;
-    while (t--)
+    int testcase = 1;
+    cin >> testcase;
+    int testcaseCount = 1;
+    while (testcase--)
     {
-        // cout << "Case #" << tc << ": ";
-        tc++;
-        solve();
+        // cout << "Case #" << testcaseCount << ": ";
+        testcaseCount++;
+        HarHarMahadev();
     }
     return 0;
 }
