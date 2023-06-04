@@ -39,7 +39,7 @@ private:
 public:
     Trie()
     {
-        root = new Node();
+        root = new trieNode();
     }
 
     void insert(string word)
