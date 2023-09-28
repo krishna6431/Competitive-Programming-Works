@@ -3,88 +3,72 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-
-class Solution {
-private:
-bool check(int cand , int k , int budget,vector<vector<int>>& composition, vector<int>& stock, vector<int>& cost,int n){
-    for(int i = 0 ; i < k ; i++){
-        int totalcost = 0;
-        for(int j = 0 ; j < n ; j++){
-            totalcost += max(0, composition[i][j] * cand - stock[j]) * cost[j];
-        }
-        if(totalcost <= budget){
-            return true;
-        }
-    }
-    return false;
-}
+#define ll long long
+class Solution
+{
 public:
-    int maxNumberOfAlloys(int n, int k, int budget, vector<vector<int>>& composition, vector<int>& stock, vector<int>& cost) {
-        int low = 0;
-        int high = budget;
-        int ans = 0;
-        while(low <= high){
-            int mid = low + (high - low)/2;
-            if(check(mid, k, budget, composition, stock, cost,n)){
-                ans = mid;
-                low = mid + 1;
-            }
-            else{
-                high = mid - 1;
-            }
-        }
-        cout << ans << endl;
-        return ans;
-    }
+	long long maximumSumOfHeights(vector<int> &arr)
+	{
+		ll n = arr.size();
+		long long ans = 0;
+		for (int i = 0; i < arr.size(); i++)
+		{
+			vector<int>newarr(n);
+			// vector<int>newbrr(n);
+			newarr[i] = arr[i];
+			// newbrr[i] = arr[i];
+			for (int j = i - 1; j >= 0; j--)
+			{
+				newarr[j] = min(newarr[j + 1], arr[j]);
+			}
+			for (int j = i + 1; j < n; j++)
+			{
+				newarr[j] = min(newarr[j - 1], arr[j]);
+			}
+			ll temp = accumulate(newarr.begin(),newarr.end(),0ll);
+			ans = max(ans,temp);
+		}
+		cout << ans << endl;
+		return ans;
+	}
 };
 
+int main()
+{
 
-int main() {
-	
 	Solution leetcode2IDE;
-	int n1 = 3;
-	int k1 = 2;
-	int budget1 = 15;
-	vector<vector<int>> composition1 = {{1,1,1},{1,1,10}};
-	vector<int> stock1 = {0,0,0};
-	vector<int> cost1 = {1,2,3};
-	int output_1 = 2;
-	if(leetcode2IDE.maxNumberOfAlloys(n1,k1,budget1,composition1,stock1,cost1)==output_1){
+	vector<int> maxHeights1 = {5, 3, 4, 1, 1};
+	int output_1 = 13;
+	if (leetcode2IDE.maximumSumOfHeights(maxHeights1) == output_1)
+	{
 		cout << "Sample #1 : Accepted" << endl;
-	}else{
+	}
+	else
+	{
 		cout << "Sample #1 : Wrong Answer" << endl;
 	}
 
-	int n2 = 3;
-	int k2 = 2;
-	int budget2 = 15;
-	vector<vector<int>> composition2 = {{1,1,1},{1,1,10}};
-	vector<int> stock2 = {0,0,100};
-	vector<int> cost2 = {1,2,3};
-	int output_2 = 5;
-	if(leetcode2IDE.maxNumberOfAlloys(n2,k2,budget2,composition2,stock2,cost2)==output_2){
+	vector<int> maxHeights2 = {6, 5, 3, 9, 2, 7};
+	int output_2 = 22;
+	if (leetcode2IDE.maximumSumOfHeights(maxHeights2) == output_2)
+	{
 		cout << "Sample #2 : Accepted" << endl;
-	}else{
+	}
+	else
+	{
 		cout << "Sample #2 : Wrong Answer" << endl;
 	}
 
-	int n3 = 2;
-	int k3 = 3;
-	int budget3 = 10;
-	vector<vector<int>> composition3 = {{2,1},{1,2},{1,1}};
-	vector<int> stock3 = {1,1};
-	vector<int> cost3 = {5,5};
-	int output_3 = 2;
-	if(leetcode2IDE.maxNumberOfAlloys(n3,k3,budget3,composition3,stock3,cost3)==output_3){
+	vector<int> maxHeights3 = {3, 2, 5, 5, 2, 3};
+	int output_3 = 18;
+	if (leetcode2IDE.maximumSumOfHeights(maxHeights3) == output_3)
+	{
 		cout << "Sample #3 : Accepted" << endl;
-	}else{
+	}
+	else
+	{
 		cout << "Sample #3 : Wrong Answer" << endl;
 	}
 
-	
-
-
 	return 0;
 }
-	
