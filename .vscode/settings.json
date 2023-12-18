@@ -27,7 +27,11 @@
     "sstream": "cpp",
     "numeric": "cpp",
     "complex": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "format": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "stacktrace": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled",
   "C_Cpp_Runner.cCompilerPath": "C:\\MinGW\\bin\\gcc.exe",
