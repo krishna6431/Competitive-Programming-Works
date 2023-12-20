@@ -1,0 +1,1 @@
+{"name":"Local: 1-string-sort","url":"/home/krishna/Desktop/Problems/Challenges-STL/1-string-sort.cpp","tests":[{"id":1677789113019,"input":"3\nbat\napple\nbatman","output":"apple\nbatman\nbat"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Desktop/Problems/Challenges-STL/1-string-sort.cpp","group":"local","local":true}

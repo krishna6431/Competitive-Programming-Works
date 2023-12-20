@@ -1,0 +1,1 @@
+{"name":"Local: 4-string-window","url":"/home/krishna/Desktop/Problems/Challenges-STL/4-string-window.cpp","tests":[{"id":1677862150944,"input":"qwerty asdfgh qazxsw\nqas","output":"qazxs"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Desktop/Problems/Challenges-STL/4-string-window.cpp","group":"local","local":true}

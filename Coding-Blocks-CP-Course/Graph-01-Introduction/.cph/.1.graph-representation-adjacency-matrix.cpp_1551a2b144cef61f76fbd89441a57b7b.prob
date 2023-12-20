@@ -1,0 +1,1 @@
+{"name":"Local: 1","url":"/home/krishna/Desktop/Problems/Graph-01/1.graph-representation-adjacency-matrix.cpp","tests":[{"id":1678968006923,"input":"4\n3\n0 1\n1 2\n2 3\n3 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Desktop/Problems/Graph-01/1.graph-representation-adjacency-matrix.cpp","group":"local","local":true}
