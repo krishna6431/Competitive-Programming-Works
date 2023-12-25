@@ -1,0 +1,138 @@
+/*
+     ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् |
+     उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात् ||
+*/
+// All Important Header Files
+#include <bits/stdc++.h>
+// ALL IMPORTANT MACROS
+#define pb push_back
+#define mp make_pair
+#define fr first
+#define sc second
+#define deb(x) cout << x << endl;
+#define loop(start, end, incr) for (int i = start; i < end; i += incr)
+#define MOD 1000000007
+#define len(x) x.size()
+#define min3(a, b, c) min(a, min(b, c))
+#define max3(a, b, c) max(a, max(b, c))
+#define all(v) v.begin(), v.end()
+#define alla(a, n) a, a + n
+#define endl "\n"
+#define RadheKrishna                  \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL);
+// USING NAME SPACE
+using namespace std;
+// SOME TYPEDEF DECLARATION
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<ll, ll> pll;
+typedef vector<ll> vll;
+typedef vector<pll> vpll;
+typedef vector<vll> vvll;
+typedef vector<string> vs;
+#define que_max priority_queue<int>
+#define que_min priority_queue<int, vi, greater<int>>
+#define bug(...) __f(#__VA_ARGS__, __VA_ARGS__)
+
+template <typename Arg1>
+void __f(const char *name, Arg1 &&arg1)
+{
+    cout << name << " : " << arg1 << endl;
+}
+template <typename Arg1, typename... Args>
+void __f(const char *names, Arg1 &&arg1, Args &&...args)
+{
+    const char *comma = strchr(names + 1, ',');
+    cout.write(names, comma - names) << " : " << arg1 << " | ";
+    __f(comma + 1, args...);
+}
+
+// CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
+void HarHarMahadev()
+{
+    string str1, str2;
+    cin >> str1 >> str2;
+    ll n = str1.size();
+    ll m = str2.size();
+    vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            if (str1[i - 1] == str2[j - 1])
+            {
+                dp[i][j] = 1 + dp[i - 1][j - 1];
+            }
+            else
+            {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+
+    // for (int i = 1; i <= m; i++)
+    // {
+    //     for (int j = 1; j <= n; j++)
+    //     {
+    //         cout << dp[j][i] << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+    ll i = n, j = m;
+    string ans = "";
+    while (i > 0 and j > 0)
+    {
+        if (str1[i - 1] == str2[j - 1])
+        {
+            ans = str1[i - 1] + ans;
+            i--;
+            j--;
+        }
+        else if (dp[i - 1][j] >= dp[i][j - 1])
+        {
+            i--;
+        }
+        else if (dp[i - 1][j] < dp[i][j - 1])
+        {
+            j--;
+        }
+    }
+    // cout << "Yaha Par String: " << ans << endl;
+    // while (i > 0)
+    // {
+    //     ans = str1[i - 1] + ans;
+    //     i--;
+    // }
+    // while (j > 0)
+    // {
+    //     ans = str2[j - 1] + ans;
+    //     j--;
+    // }
+
+    cout << ans << endl;
+    // cout << dp[n][m] << endl;
+}
+
+int main()
+{
+    RadheKrishna;
+
+    // #ifndef ONLINE_JUDGE
+    //     freopen("input.txt", "r", stdin);
+    //     freopen("output.txt", "w", stdout);
+    // #endif
+    // int testcase = 1;
+    // cin >> testcase;
+    // int testcaseCount = 1;
+    // while (testcase--)
+    // {
+    //     // cout << "Case #" << testcaseCount << ": ";
+    //     testcaseCount++;
+    HarHarMahadev();
+    // }
+    return 0;
+}

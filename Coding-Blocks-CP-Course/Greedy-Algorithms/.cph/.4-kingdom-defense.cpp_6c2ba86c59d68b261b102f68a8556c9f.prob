@@ -1,0 +1,1 @@
+{"name":"Local: 4-kingdom-defense","url":"/home/krishna/Desktop/Problems/Greedy-Algorithms/4-kingdom-defense.cpp","tests":[{"id":1680789328737,"input":"1\n15 8 3\n3 8\n11 2\n8 6","output":"12"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Desktop/Problems/Greedy-Algorithms/4-kingdom-defense.cpp","group":"local","local":true}

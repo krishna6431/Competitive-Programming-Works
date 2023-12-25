@@ -1,1 +1,0 @@
-{"name":"Local: tcs_mock_vita_1_D","url":"d:\\Codes\\CP\\TCS\\tcs_mock_vita_1_D.cpp","tests":[{"id":1645772941487,"input":"7\n100000 100000\n98754 100000 999999 999876 999985 789546 215654","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Codes\\CP\\TCS\\tcs_mock_vita_1_D.cpp","group":"local","local":true}

@@ -23,7 +23,15 @@
     "cmath": "cpp",
     "chrono": "cpp",
     "random": "cpp",
-    "limits": "cpp"
+    "limits": "cpp",
+    "sstream": "cpp",
+    "numeric": "cpp",
+    "complex": "cpp",
+    "*.tcc": "cpp",
+    "format": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "stacktrace": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled",
   "C_Cpp_Runner.cCompilerPath": "C:\\MinGW\\bin\\gcc.exe",
@@ -43,5 +51,7 @@
   "C_Cpp_Runner.excludeSearch": [],
   "C_Cpp_Runner.enableWarnings": true,
   "C_Cpp_Runner.warningsAsError": false,
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "python.analysis.typeCheckingMode": "basic",
+  "cph.general.onceMaintainerMessage": false
 }
