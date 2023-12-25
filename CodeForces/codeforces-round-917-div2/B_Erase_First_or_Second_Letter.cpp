@@ -209,3 +209,48 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
+void HarHarMahadev()
+{
+    ll n;
+    cin >> n;
+    string str;
+    cin >> str;
+    unordered_map<char, ll> mp;
+    ll ans = 0;
+    for (auto x : str)
+    {
+        mp[x]++;
+        ans += mp.size();
+    }
+    cout << ans << endl;
+}
+
+int main()
+{
+    RadheKrishna;
+#ifdef mr_krishna
+    freopen("Error.txt", "w", stderr);
+#endif
+    auto s1 = high_resolution_clock::now();
+    ll testcase = 1;
+    if (testcase)
+    {
+        ll testcase_cnt;
+        cin >> testcase_cnt;
+        while (testcase_cnt--)
+        {
+            HarHarMahadev();
+        }
+    }
+    else
+    {
+        HarHarMahadev();
+    }
+    auto st1 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(st1 - s1);
+
+#ifdef mr_krishna
+    cerr << "Time: " << duration.count() / 1000 << endl;
+#endif
+    return 0;
+}

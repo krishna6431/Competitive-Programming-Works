@@ -209,3 +209,91 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
+void check(vll &a, ll &ans, ll n)
+{
+    for (int i = 1; i <= n; i++)
+    {
+        if (a[i] == i)
+        {
+            ans++;
+        }
+    }
+}
+
+void check2(vll &v1, vll &v2, ll index)
+{
+    for (int i = 1; i <= v2[index]; i++)
+    {
+        v1[i] += 1;
+    }
+}
+
+void HarHarMahadev()
+{
+    ll n, k, d;
+    cin >> n >> k >> d;
+    vll v1(n + 1);
+    vll v2(k + 1);
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> v1[i];
+    }
+    for (int i = 1; i <= k; i++)
+    {
+        cin >> v2[i];
+    }
+    ll last = d;
+    if (d > 3e5 + 5)
+    {
+        last = 3e5 + 5;
+    }
+    ll result = 0;
+    ll index = 1;
+    for (int j = 1; j <= last; j++)
+    {
+        ll ans = 0;
+        check(v1, ans, n);
+        ans += ((d - j) >> 1);
+        if (ans > result)
+        {
+            result = ans;
+        }
+        check2(v1, v2, index);
+        index = index + 1;
+        if (index > k)
+        {
+            index = 1;
+        }
+    }
+    cout << result << endl;
+}
+
+int main()
+{
+    RadheKrishna;
+#ifdef mr_krishna
+    freopen("Error.txt", "w", stderr);
+#endif
+    auto s1 = high_resolution_clock::now();
+    ll testcase = 1;
+    if (testcase)
+    {
+        ll testcase_cnt;
+        cin >> testcase_cnt;
+        while (testcase_cnt--)
+        {
+            HarHarMahadev();
+        }
+    }
+    else
+    {
+        HarHarMahadev();
+    }
+    auto st1 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(st1 - s1);
+
+#ifdef mr_krishna
+    cerr << "Time: " << duration.count() / 1000 << endl;
+#endif
+    return 0;
+}
