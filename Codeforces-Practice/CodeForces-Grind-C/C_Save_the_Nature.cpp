@@ -209,121 +209,144 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
-
-class Solution
+void HarHarMahadev()
 {
-public:
-    int maximumLength(string s)
+    ll n;
+    cin >> n;
+    vll v(n + 1);
+    v[0] = -1e9;
+    for (int i = 1; i <= n; i++)
     {
-        int ans = -1;
-        for (char ch = 'a'; ch <= 'z'; ch++)
-        {
-            multiset<ll> mt;
-            for (int i = 0; i < s.size(); i++)
-            {
-                if (s[i] == ch)
-                {
-                    int j = i;
-                    while (j < s.size() && s[j] == ch)
-                    {
-                        j++;
-                    }
-                    mt.insert(j - i);
-                    if (mt.size() > 3)
-                    {
-                        mt.erase(mt.begin());
-                    }
-                    i = j - 1;
-                }
-            }
-            // cout << ch << endl;
-            if (mt.size() == 1)
-            {
-                ans = max(ans, (int)*mt.begin() - 2);
-            }
-            else if (mt.size() == 2)
-            {
-                int a = *mt.begin();
-                mt.erase(mt.begin());
-                int b = *mt.begin();
-                if (a == b)
-                {
-                    ans = max(ans, a - 1);
-                }
-                if (b >= a + 1)
-                {
-                    ans = max(ans, a);
-                }
-                ans = max(ans, b - 2);
-            }
-            else if (mt.size() == 3)
-            {
+        cin >> v[i];
+    }
+    ll x1, a;
+    cin >> x1 >> a;
+    ll x2, b;
+    cin >> x2 >> b;
+    ll k;
+    cin >> k;
+    sort(all(v));
+    ll j = n;
+    ll lcm = (a * b) / __gcd(a, b);
+    // bug(lcm);
+    ll maxi = max(a, b);
+    ll mini = min(a, b);
+    ll xx1, xx2;
+    if (a == maxi)
+    {
+        xx1 = x1;
+    }
+    else
+    {
+        xx1 = x2;
+    }
+    if (a == mini)
+    {
+        xx2 = x1;
+    }
+    else
+    {
+        xx2 = x2;
+    }
+    if (maxi == mini)
+    {
+        xx1 = x1;
+        xx2 = x2;
+    }
+    ll ans = 0;
+    ll total = 0;
+    ll arr[n + 1] = {0};
+    map<ll, ll> mp;
+    bug(maxi, mini, xx1, xx2);
+    for (int i = 1; i <= n; i++)
+    {
 
-                ans = max(ans, (int)*mt.begin());
-                int a = *mt.begin();
-                mt.erase(mt.begin());
-                int b = *mt.begin();
-                mt.erase(mt.begin());
-                int c = *mt.begin();
-                if (a == b)
-                {
-                    ans = max(ans, a - 1);
-                }
-                if (b == c)
-                {
-                    ans = max(ans, b - 1);
-                }
-                if (b >= a + 1)
-                {
-                    ans = max(ans, a);
-                }
-                if (c >= b + 1)
-                {
-                    ans = max(ans, b);
-                }
-                ans = max(ans, c - 2);
+        if (i % lcm == 0)
+        {
+            mp[i]++;
+            arr[i] = (v[j] / 100) * (xx1 + xx2);
+            j--;
+            total += arr[i];
+            ans = max(ans, i * 1ll);
+            for (int i = 1; i <= n; i++)
+            {
+                cout << arr[i] << " ";
+            }
+            cout << endl;
+            if (total >= k)
+            {
+                cout << ans << endl;
+                return;
             }
         }
-        cout << ans << endl;
-        return ans <= 0 ? -1 : ans;
     }
-};
+    for (int i = 1; i <= n; i++)
+    {
+        if (i % maxi && mp[i] == 0)
+        {
+            mp[i]++;
+            arr[i] = (v[j] / 100) * (xx1);
+            j--;
+            total += arr[i];
+            ans = max(ans, i * 1ll);
+            if (total >= k)
+            {
+                cout << ans << endl;
+                return;
+            }
+        }
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        if (i % mini == 0 and mp[i] == 0)
+        {
+            mp[i]++;
+            arr[i] = (v[j] / 100) * xx2;
+            j--;
+            total += arr[i];
+            ans = max(ans, i * 1ll);
+            if (total >= k)
+            {
+                cout << ans << endl;
+                return;
+            }
+        }
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    cout << -1 << endl;
+}
 
 int main()
 {
-
-    Solution leetcode2IDE;
-    string s1 = "jinhhhtttttttefffffjjjjjjjjjfffffjjjjjjjjjqvvvvvvg";
-    int output_1 = 2;
-    if (leetcode2IDE.maximumLength(s1) == output_1)
+    RadheKrishna;
+#ifdef mr_krishna
+    freopen("Error.txt", "w", stderr);
+#endif
+    auto s1 = high_resolution_clock::now();
+    ll testcase = 1;
+    if (testcase)
     {
-        cout << "Sample #1 : Accepted" << endl;
+        ll testcase_cnt;
+        cin >> testcase_cnt;
+        while (testcase_cnt--)
+        {
+            HarHarMahadev();
+        }
     }
     else
     {
-        cout << "Sample #1 : Wrong Answer" << endl;
+        HarHarMahadev();
     }
+    auto st1 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(st1 - s1);
 
-    string s2 = "abcdef";
-    int output_2 = -1;
-    if (leetcode2IDE.maximumLength(s2) == output_2)
-    {
-        cout << "Sample #2 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #2 : Wrong Answer" << endl;
-    }
-
-    string s3 = "abcaba";
-    int output_3 = 1;
-    if (leetcode2IDE.maximumLength(s3) == output_3)
-    {
-        cout << "Sample #3 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #3 : Wrong Answer" << endl;
-    }
+#ifdef mr_krishna
+    cerr << "Time: " << duration.count() / 1000 << endl;
+#endif
     return 0;
 }

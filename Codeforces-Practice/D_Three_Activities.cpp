@@ -209,121 +209,106 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
-
-class Solution
+void HarHarMahadev()
 {
-public:
-    int maximumLength(string s)
+    ll n;
+    cin >> n;
+    vll a(n);
+    vll b(n);
+    vll c(n);
+    for (auto &x : a)
     {
-        int ans = -1;
-        for (char ch = 'a'; ch <= 'z'; ch++)
-        {
-            multiset<ll> mt;
-            for (int i = 0; i < s.size(); i++)
-            {
-                if (s[i] == ch)
-                {
-                    int j = i;
-                    while (j < s.size() && s[j] == ch)
-                    {
-                        j++;
-                    }
-                    mt.insert(j - i);
-                    if (mt.size() > 3)
-                    {
-                        mt.erase(mt.begin());
-                    }
-                    i = j - 1;
-                }
-            }
-            // cout << ch << endl;
-            if (mt.size() == 1)
-            {
-                ans = max(ans, (int)*mt.begin() - 2);
-            }
-            else if (mt.size() == 2)
-            {
-                int a = *mt.begin();
-                mt.erase(mt.begin());
-                int b = *mt.begin();
-                if (a == b)
-                {
-                    ans = max(ans, a - 1);
-                }
-                if (b >= a + 1)
-                {
-                    ans = max(ans, a);
-                }
-                ans = max(ans, b - 2);
-            }
-            else if (mt.size() == 3)
-            {
+        cin >> x;
+    }
+    for (auto &x : b)
+    {
+        cin >> x;
+    }
+    for (auto &x : c)
+    {
+        cin >> x;
+    }
+    vpll ap, bp, cp;
+    for (int i = 1; i <= n; i++)
+    {
+        ll t = a[i - 1];
+        ap.pb({t, i});
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        ll t = b[i - 1];
+        bp.pb({t, i});
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        ll t = c[i - 1];
+        cp.pb({t, i});
+    }
 
-                ans = max(ans, (int)*mt.begin());
-                int a = *mt.begin();
-                mt.erase(mt.begin());
-                int b = *mt.begin();
-                mt.erase(mt.begin());
-                int c = *mt.begin();
-                if (a == b)
+    sort(all(ap));
+    sort(all(bp));
+    sort(all(cp));
+    reverse(all(ap));
+    reverse(all(bp));
+    reverse(all(cp));
+    ll ans = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                ll t1 = ap[i].sc;
+                ll t2 = bp[j].sc;
+                ll t3 = cp[k].sc;
+                ll p1 = ap[i].fr;
+                ll p2 = bp[j].fr;
+                ll p3 = cp[k].fr;
+                if (t1 != t2)
                 {
-                    ans = max(ans, a - 1);
+                    if (t2 != t3)
+                    {
+                        if (t1 != t3)
+                        {
+                            if ((p1 + p2 + p3) > ans)
+                            {
+                                ans = (p1 + p2 + p3);
+                            }
+                        }
+                    }
                 }
-                if (b == c)
-                {
-                    ans = max(ans, b - 1);
-                }
-                if (b >= a + 1)
-                {
-                    ans = max(ans, a);
-                }
-                if (c >= b + 1)
-                {
-                    ans = max(ans, b);
-                }
-                ans = max(ans, c - 2);
             }
         }
-        cout << ans << endl;
-        return ans <= 0 ? -1 : ans;
     }
-};
+    cout << ans << endl;
+}
 
 int main()
 {
-
-    Solution leetcode2IDE;
-    string s1 = "jinhhhtttttttefffffjjjjjjjjjfffffjjjjjjjjjqvvvvvvg";
-    int output_1 = 2;
-    if (leetcode2IDE.maximumLength(s1) == output_1)
+    RadheKrishna;
+#ifdef mr_krishna
+    freopen("Error.txt", "w", stderr);
+#endif
+    auto s1 = high_resolution_clock::now();
+    ll testcase = 1;
+    if (testcase)
     {
-        cout << "Sample #1 : Accepted" << endl;
+        ll testcase_cnt;
+        cin >> testcase_cnt;
+        while (testcase_cnt--)
+        {
+            HarHarMahadev();
+        }
     }
     else
     {
-        cout << "Sample #1 : Wrong Answer" << endl;
+        HarHarMahadev();
     }
+    auto st1 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(st1 - s1);
 
-    string s2 = "abcdef";
-    int output_2 = -1;
-    if (leetcode2IDE.maximumLength(s2) == output_2)
-    {
-        cout << "Sample #2 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #2 : Wrong Answer" << endl;
-    }
-
-    string s3 = "abcaba";
-    int output_3 = 1;
-    if (leetcode2IDE.maximumLength(s3) == output_3)
-    {
-        cout << "Sample #3 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #3 : Wrong Answer" << endl;
-    }
+#ifdef mr_krishna
+    cerr << "Time: " << duration.count() / 1000 << endl;
+#endif
     return 0;
 }

@@ -209,121 +209,143 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
+ll n, m;
+ll dx[4] = {-1, 0, 1, 0};
+ll dy[4] = {0, 1, 0, -1};
 
-class Solution
+bool isvalid(ll x, ll y)
 {
-public:
-    int maximumLength(string s)
+    if (x < 0 || x >= n || y < 0 || y >= m)
+        return false;
+    return true;
+}
+vvll graph;
+vvll ans;
+vvll cmp;
+vvll visited;
+ll cn = 1;
+ll dfs(ll i, ll j)
+{
+    if (!isvalid(i, j))
     {
-        int ans = -1;
-        for (char ch = 'a'; ch <= 'z'; ch++)
+        return 0;
+    }
+    if (visited[i][j] or graph[i][j] == 1)
+    {
+        return 0;
+    }
+    visited[i][j] = 1;
+    cmp[i][j] = 55;
+    ll ans = 0;
+    for (int k = 0; k < 4; k++)
+    {
+        ll x = i + dx[k];
+        ll y = j + dy[k];
+        if (!visited[x][y] and graph[x][y] == 0)
         {
-            multiset<ll> mt;
-            for (int i = 0; i < s.size(); i++)
+            ans = 1 + dfs(x, y);
+        }
+    }
+    return ans;
+}
+void HarHarMahadev()
+{
+    cin >> n >> m;
+    ans.resize(n, vll(m, 0));
+    graph.resize(n, vll(m, 0));
+    cmp.resize(n, vll(m, 0));
+    visited.resize(n, vll(m, 0));
+    map<ll, ll> mp;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            char ch;
+            cin >> ch;
+            if (ch == '*')
             {
-                if (s[i] == ch)
-                {
-                    int j = i;
-                    while (j < s.size() && s[j] == ch)
-                    {
-                        j++;
-                    }
-                    mt.insert(j - i);
-                    if (mt.size() > 3)
-                    {
-                        mt.erase(mt.begin());
-                    }
-                    i = j - 1;
-                }
+                graph[i][j] = 1;
             }
-            // cout << ch << endl;
-            if (mt.size() == 1)
+            else
             {
-                ans = max(ans, (int)*mt.begin() - 2);
-            }
-            else if (mt.size() == 2)
-            {
-                int a = *mt.begin();
-                mt.erase(mt.begin());
-                int b = *mt.begin();
-                if (a == b)
-                {
-                    ans = max(ans, a - 1);
-                }
-                if (b >= a + 1)
-                {
-                    ans = max(ans, a);
-                }
-                ans = max(ans, b - 2);
-            }
-            else if (mt.size() == 3)
-            {
-
-                ans = max(ans, (int)*mt.begin());
-                int a = *mt.begin();
-                mt.erase(mt.begin());
-                int b = *mt.begin();
-                mt.erase(mt.begin());
-                int c = *mt.begin();
-                if (a == b)
-                {
-                    ans = max(ans, a - 1);
-                }
-                if (b == c)
-                {
-                    ans = max(ans, b - 1);
-                }
-                if (b >= a + 1)
-                {
-                    ans = max(ans, a);
-                }
-                if (c >= b + 1)
-                {
-                    ans = max(ans, b);
-                }
-                ans = max(ans, c - 2);
+                graph[i][j] = 0;
             }
         }
-        cout << ans << endl;
-        return ans <= 0 ? -1 : ans;
     }
-};
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cout << graph[i][j] << " ";
+        }
+        cout << endl;
+    }
+    // * = 1
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (!visited[i][j] and graph[i][j] == 1)
+            {
+                ll sz = dfs(i, j);
+                mp[sz] = cn;
+                cn++;
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cout << cmp[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (graph[i][j] == 1)
+            {
+                cout << mp[cmp[i][j]];
+            }
+            else
+            {
+                cout << ".";
+            }
+        }
+        cout << endl;
+    }
+}
 
 int main()
 {
-
-    Solution leetcode2IDE;
-    string s1 = "jinhhhtttttttefffffjjjjjjjjjfffffjjjjjjjjjqvvvvvvg";
-    int output_1 = 2;
-    if (leetcode2IDE.maximumLength(s1) == output_1)
+    RadheKrishna;
+#ifdef mr_krishna
+    freopen("Error.txt", "w", stderr);
+#endif
+    auto s1 = high_resolution_clock::now();
+    ll testcase = 0;
+    if (testcase)
     {
-        cout << "Sample #1 : Accepted" << endl;
+        ll testcase_cnt;
+        cin >> testcase_cnt;
+        while (testcase_cnt--)
+        {
+            HarHarMahadev();
+        }
     }
     else
     {
-        cout << "Sample #1 : Wrong Answer" << endl;
+        HarHarMahadev();
     }
+    auto st1 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(st1 - s1);
 
-    string s2 = "abcdef";
-    int output_2 = -1;
-    if (leetcode2IDE.maximumLength(s2) == output_2)
-    {
-        cout << "Sample #2 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #2 : Wrong Answer" << endl;
-    }
-
-    string s3 = "abcaba";
-    int output_3 = 1;
-    if (leetcode2IDE.maximumLength(s3) == output_3)
-    {
-        cout << "Sample #3 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #3 : Wrong Answer" << endl;
-    }
+#ifdef mr_krishna
+    cerr << "Time: " << duration.count() / 1000 << endl;
+#endif
     return 0;
 }
