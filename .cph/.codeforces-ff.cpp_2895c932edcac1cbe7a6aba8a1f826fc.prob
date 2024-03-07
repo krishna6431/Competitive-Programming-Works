@@ -1,0 +1,1 @@
+{"name":"Local: codeforces-ff","url":"/home/krishna/Competitive-Programming-Works/codeforces-ff.cpp","tests":[{"id":1705680337619,"input":"6 8 2 1 5 1 2 2 3 10\n5 9 2 2 1 2 2 3 3 4\n1 3 4 4 3 1 2 2 3 4\n10","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Competitive-Programming-Works/codeforces-ff.cpp","group":"local","local":true}

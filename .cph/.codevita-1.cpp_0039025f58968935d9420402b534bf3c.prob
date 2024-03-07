@@ -1,0 +1,1 @@
+{"name":"Local: codevita-1","url":"/home/krishna/Competitive-Programming-Works/codevita-1.cpp","tests":[{"id":1705660810762,"input":"is A<B\nYes\nprint A\nsi\nis A>B\nYes\nprint B\nNo\nprint A\nsi\nA B\n1 21","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/krishna/Competitive-Programming-Works/codevita-1.cpp","group":"local","local":true}

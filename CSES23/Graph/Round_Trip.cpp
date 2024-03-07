@@ -209,60 +209,106 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
-
-class Solution
+vvll graph;
+vll parent;
+vll visited;
+ll start, last;
+ll n, m;
+bool dfs(ll node, ll par)
 {
-public:
-    bool hasTrailingZeros(vector<int> &nums)
+    visited[node] = 1;
+    parent[node] = par;
+    for (auto neigh : graph[node])
     {
-        ll count = 0;
-        for (int i = 0; i < nums.size(); i++)
+        if (neigh == par)
         {
-            if (nums[i] % 2 == 0)
+            continue;
+        }
+        if (visited[neigh])
+        {
+            start = neigh;
+            last = node;
+            return true;
+        }
+        if (!visited[neigh])
+        {
+            if (dfs(neigh, node))
             {
-                count++;
+                return true;
             }
         }
-        return count >= 2;
     }
-};
+    return false;
+}
+
+void HarHarMahadev()
+{
+    cin >> n >> m;
+    graph.resize(n + 1);
+    parent.resize(n + 1);
+    visited.resize(n + 1);
+    for (int i = 0; i < m; i++)
+    {
+        ll u, v;
+        cin >> u >> v;
+        graph[u].pb(v);
+        graph[v].pb(u);
+    }
+    bool flag = false;
+    for (int i = 1; i <= n; i++)
+    {
+        if (!visited[i] and dfs(i, -1) and !flag)
+        {
+            flag = true;
+            vll ans;
+            ans.pb(start);
+            ll temp = last;
+            while (temp != start)
+            {
+                ans.pb(temp);
+                temp = parent[temp];
+            }
+            ans.pb(start);
+            cout << ans.size() << endl;
+            for (auto x : ans)
+            {
+                cout << x << " ";
+            }
+            cout << endl;
+        }
+    }
+    if (!flag)
+    {
+        cout << "IMPOSSIBLE" << endl;
+    }
+}
 
 int main()
 {
-
-    Solution leetcode2IDE;
-    vector<int> nums1 = {1, 2, 3, 4, 5};
-    bool output_1 = true;
-    if (leetcode2IDE.hasTrailingZeros(nums1) == output_1)
+    RadheKrishna;
+#ifdef mr_krishna
+    freopen("Error.txt", "w", stderr);
+#endif
+    auto s1 = high_resolution_clock::now();
+    ll testcase = 0;
+    if (testcase)
     {
-        cout << "Sample #1 : Accepted" << endl;
+        ll testcase_cnt;
+        cin >> testcase_cnt;
+        while (testcase_cnt--)
+        {
+            HarHarMahadev();
+        }
     }
     else
     {
-        cout << "Sample #1 : Wrong Answer" << endl;
+        HarHarMahadev();
     }
+    auto st1 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(st1 - s1);
 
-    vector<int> nums2 = {2, 4, 8, 16};
-    bool output_2 = true;
-    if (leetcode2IDE.hasTrailingZeros(nums2) == output_2)
-    {
-        cout << "Sample #2 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #2 : Wrong Answer" << endl;
-    }
-
-    vector<int> nums3 = {1, 3, 5, 7, 9};
-    bool output_3 = false;
-    if (leetcode2IDE.hasTrailingZeros(nums3) == output_3)
-    {
-        cout << "Sample #3 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #3 : Wrong Answer" << endl;
-    }
-
+#ifdef mr_krishna
+    cerr << "Time: " << duration.count() / 1000 << endl;
+#endif
     return 0;
 }
