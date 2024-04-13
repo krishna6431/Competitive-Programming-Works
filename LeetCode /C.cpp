@@ -209,104 +209,70 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
-bool cmp(string a, string b)
-{
-    if (len(a) == len(b))
-    {
-        return a < b;
-    }
-    return len(a) < len(b);
-}
+
 class Solution
 {
 public:
-    vector<string> shortestSubstrings(vector<string> &arr)
+    vector<int> minimumTime(int n, vector<vector<int>> &edges, vector<int> &disappear)
     {
-        vector<string> ans(arr.size(), "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-        map<string, set<int>> mp;
-        for (int i = 0; i < len(arr); i++)
+        vector<pair<ll, ll>> adj[n + 1];
+        for (ll i = 0; i < edges.size(); i++)
         {
-            // generate substring;
-            string str = arr[i];
-            ll sz = str.size();
-            for (int j = 1; j <= sz; j++)
+            ll x = edges[i][0];
+            ll y = edges[i][1];
+            ll c = edges[i][2];
+            adj[x].push_back({y, c});
+        }
+        vector<ll> dist(n + 1, 1e18);
+        vector<ll> visited(n + 1, 0);
+        dist[0] = 0;
+        priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> q;
+        q.push({0, 1});
+        while (!q.empty())
+        {
+            auto it = q.top();
+            q.pop();
+            ll node = it.second;
+            if (visited[node] == 1)
             {
-                for (int k = 0; k <= sz - j; k++)
+                continue;
+            }
+            visited[node] = 1;
+            ll d = it.first;
+            for (auto i : adj[node])
+            {
+                if (d + i.second < dist[i.first] and d + i.second <= disappear[i.second])
                 {
-                    string sub = str.substr(k, j);
-                    // cout << i << " " << sub << endl;
-                    mp[sub].insert(i);
+                    dist[i.first] = d + i.second;
+                    q.push({i.second + d, i.first});
                 }
             }
         }
-        // for (auto x : mp)
-        // {
-        //     cout << x.first << " " << x.second.size() << endl;
-        // }
-        for (int i = 0; i < len(arr); i++)
+        vector<int> ans;
+        for (ll i = 0; i < n; i++)
         {
-            // generate substring;
-            string str = arr[i];
-            ll sz = str.size();
-            bool flag = false;
-            vector<string> temp;
-            for (int j = 1; j <= sz; j++)
-            {
-                for (int k = 0; k <= sz - j; k++)
-                {
-                    string sub = str.substr(k, j);
-                    // cout << i << " " << sub << endl;
-
-                    if (mp[sub].size() == 1)
-                    {
-                        temp.push_back(sub);
-                    }
-                }
-            }
-            sort(all(temp), cmp);
-            if (temp.size() == 0)
-            {
-                ans[i] = "";
-            }
-            else
-            {
-                ans[i] = temp[0];
-            }
+            ans.push_back(dist[i]);
         }
-        // for (auto x : ans)
-        // {
-        //     cout << x << " ";
-        // }
-        // cout << endl;
         return ans;
     }
 };
 
 int main()
 {
-
-    Solution leetcode2IDE;
-    vector<string> arr1 = {"cab", "ad", "bad", "c"};
-    vector<string> output_1 = {"ab", "", "ba", ""};
-    if (leetcode2IDE.shortestSubstrings(arr1) == output_1)
+    ll t;
+    cin >> t;
+    while (t--)
     {
-        cout << "Sample #1 : Accepted" << endl;
+        ll n;
+        cin >> n;
+        vector<int> ans(n);
+        Solution sol;
+        for (auto &x : ans)
+        {
+            cin >> x;
+        }
+        ll k;
+        cin >> k;
+        cout << sol.minimumSubarrayLength(ans, k) << endl;
     }
-    else
-    {
-        cout << "Sample #1 : Wrong Answer" << endl;
-    }
-
-    vector<string> arr2 = {"gfnt", "xn", "mdz", "yfmr", "fi", "wwncn", "hkdy"};
-    vector<string> output_2 = {"g", "x", "z", "r", "i", "c", "h"};
-    if (leetcode2IDE.shortestSubstrings(arr2) == output_2)
-    {
-        cout << "Sample #2 : Accepted" << endl;
-    }
-    else
-    {
-        cout << "Sample #2 : Wrong Answer" << endl;
-    }
-
-    return 0;
 }

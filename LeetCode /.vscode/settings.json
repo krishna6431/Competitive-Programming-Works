@@ -4,6 +4,14 @@
         "ranges": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "forward_list": "cpp",
+        "chrono": "cpp",
+        "span": "cpp"
     }
 }
