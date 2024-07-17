@@ -209,6 +209,57 @@ vector<ll> sieve(int n)
 /********************************************************************/
 
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
+int dp[3001][3001];
+int solve(int i, int j, string &str1, string &str2)
+{
+    if (i == str1.size() or j == str2.size())
+    {
+        return 0;
+    }
+
+    if (dp[i][j] != -1)
+    {
+        return dp[i][j];
+    }
+
+    int ans = solve(i + 1, j, str1, str2);
+    ans = max(ans, solve(i, j + 1, str1, str2));
+    if (str1[i] == str2[j])
+    {
+        // cout << str1[i] << "";
+        ans = max(ans, 1 + solve(i + 1, j + 1, str1, str2));
+    }
+    return dp[i][j] = ans;
+}
+
+void generate(int i, int j, string &str1, string &str2)
+{
+    if (i == str1.size() or j == str2.size())
+    {
+        return;
+    }
+
+    if (str1[i] == str2[j])
+    {
+        cout << str1[i] << "";
+        generate(i + 1, j + 1, str1, str2);
+    }
+    else
+    {
+        int op1 = solve(i + 1, j, str1, str2);
+        int op2 = solve(i, j + 1, str1, str2);
+
+        if (op1 > op2)
+        {
+            generate(i + 1, j, str1, str2);
+        }
+        else
+        {
+            generate(i, j + 1, str1, str2);
+        }
+    }
+}
+
 void HarHarMahadev()
 {
     string str1;
@@ -217,51 +268,11 @@ void HarHarMahadev()
     cin >> str2;
     int n = str1.size();
     int m = str2.size();
-    int dp[n][m];
-    memset(dp,0,sizeof(dp));
-    for (int i = 0; i < n; i++)
-    {
-        if(str1[i] == str2[0]){
-            dp[i][0] = 1;
-        }
-        else{
-            dp[i][0] = max(dp[i-1][0],0);
-        }
-    }
-
-    for(int j = 0; j < m ; j++){
-        if(str1[0] == str2[j]){
-            dp[0][j] = 1;
-        }
-        else{
-            dp[0][j] = max(dp[0][j-1],0);
-        }
-    }
-
-    for (int i = 1; i < n; i++)
-    {
-        for (int j = 1; j < m; j++)
-        {
-            if (str1[i] == str2[j])
-            {
-                dp[i][j] = 1 + dp[i - 1][j - 1];
-            }
-            else
-            {
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-            }
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            cout << dp[i][j] << " ";
-        }
-        cout << endl;
-    }
-    cout << dp[n-1][m-1] << endl;
+    memset(dp, -1, sizeof(dp));
+    int ans = solve(0, 0, str1, str2);
+    // cout << endl;
+    generate(0, 0, str1, str2);
+    // cout << ans << endl;
 }
 
 int main()

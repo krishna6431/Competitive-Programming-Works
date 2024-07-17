@@ -211,46 +211,80 @@ vector<ll> sieve(int n)
 // CODE WRITTEN BY mr_krishna(cc,cf,google)/krishna_6431(gfg,leet)
 void HarHarMahadev()
 {
-    ll n, k, q;
+    // ll n, k, q;
+    // cin >> n >> k >> q;
+    // vll partial(1000005, 0);
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     ll l, r;
+    //     cin >> l >> r;
+    //     partial[l]++;
+    //     partial[r + 1]--;
+    // }
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     partial[i] += partial[i - 1];
+    // }
+
+    // // keep the values 1 where values >=k or else 0.
+    // for (int i = 1; i <= n; i++)
+    //     partial[i] = (partial[i] >= k);
+
+    // // now to answer query in O(1), we will build prefix sum on this 0/1 array to
+    // // get count of positions.
+    // ll prefixSum[1000005];
+    // prefixSum[0] = 0;
+    // for (int i = 1; i <= n; i++)
+    // {
+    //     prefixSum[i] = prefixSum[i - 1] + partial[i];
+    // }
+
+    // while (q--)
+    // {
+    //     ll l, r;
+    //     cin >> l >> r;
+    //     // gives the count of 1 positions in O(1).
+    //     cout << prefixSum[r] - prefixSum[l - 1] << endl;
+    // }
+    int N = 1000005;
+    int n, k, q;
     cin >> n >> k >> q;
-    vll partial(1000005, 0);
+    int arr[N]; // note that N and n are different.
+    for (int i = 0; i < N; i++)
+        arr[i] = 0;
+
     for (int i = 1; i <= n; i++)
     {
-        ll l, r;
+        int l, r;
         cin >> l >> r;
-        partial[l]++;
-        partial[r + 1]--;
+        // use the technique of Partial sum to build the value at each index.
+        arr[l]++;
+        arr[r + 1]--;
     }
-    for (int i = 1; i <= n; i++)
+    // finally build the prefix sum.
+    for (int i = 1; i < N; i++)
+        arr[i] += arr[i - 1];
+
+    // keep the values 1 where values >=k or else 0.
+    for (int i = 1; i < N; i++)
+        arr[i] = (arr[i] >= k);
+
+    // now to answer query in O(1), we will build prefix sum on this 0/1 array to
+    // get count of positions.
+    int prefixSum[N];
+    prefixSum[0] = 0;
+    for (int i = 1; i < N; i++)
     {
-        partial[i] += partial[i - 1];
+        prefixSum[i] = prefixSum[i - 1] + arr[i];
     }
 
-    vll ans;
-    for (int i = 1; i <= n; i++)
-    {
-        if (partial[i] >= k)
-        {
-            ans.pb(i);
-        }
-    }
     while (q--)
     {
-        ll l, r;
+        int l, r;
         cin >> l >> r;
-        ll itr1 = lower_bound(all(ans), l) - ans.begin();
-        ll itr2 = upper_bound(all(ans), r) - ans.begin();
-        if (itr1 == ans.size())
-        {
-            cout << 0 << endl;
-            continue;
-        }
-        if (ans[itr1] > r)
-        {
-            cout << 0 << endl;
-            continue;
-        }
-        cout << itr2 - itr1 << endl;
+        // gives the count of 1 positions in O(1).
+        int ans = prefixSum[r] - prefixSum[l - 1];
+        cout << ans << "\n";
     }
 }
 
